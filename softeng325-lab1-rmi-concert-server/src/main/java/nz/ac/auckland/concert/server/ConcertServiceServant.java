@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import nz.ac.auckland.concert.common.Concert;
-import nz.ac.auckland.concert.common.ConcertServant;
 import nz.ac.auckland.concert.common.ConcertService;
 
 public class ConcertServiceServant extends UnicastRemoteObject implements ConcertService { 
@@ -28,7 +27,7 @@ public class ConcertServiceServant extends UnicastRemoteObject implements Concer
 	@Override
 	public Concert createConcert(Concert concert) throws RemoteException {
 		Long id=_idCounter.incrementAndGet();
-		Concert newConcert = new ConcertServant(concert.getAllState(), id);
+		Concert newConcert = new Concert(id,concert);
 		_concerts.put(id, newConcert);
 		return newConcert;
 	}

@@ -14,8 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import nz.ac.auckland.concert.common.Concert;
-import nz.ac.auckland.concert.common.ConcertDetails;
-import nz.ac.auckland.concert.common.ConcertServant;
 import nz.ac.auckland.concert.common.ConcertService;
 import nz.ac.auckland.concert.common.Config;
 
@@ -38,8 +36,8 @@ public class Client {
 	@Test
 	public void testCreate() throws RemoteException {
 		try {
-			Concert concertA = _proxy.createConcert(new ConcertServant(new ConcertDetails(null, null), null));
-			Concert concertB = _proxy.createConcert(new ConcertServant(new ConcertDetails(null, null), null));
+			Concert concertA = _proxy.createConcert(new Concert(null, null, null));
+			Concert concertB = _proxy.createConcert(new Concert(null, null, null));
 
 			System.out.println("ConcertA's Id is " + concertA.getId());
 			System.out.println("ConcertB's Id is " + concertB.getId());
@@ -51,7 +49,7 @@ public class Client {
 			assertEquals(2, remoteConcerts.size());
 
 			for (Concert c : remoteConcerts) {
-				System.out.println(c.getAllState().toString());
+				System.out.println(c.toString());
 			}
 		} catch (Exception e) {
 			fail();
